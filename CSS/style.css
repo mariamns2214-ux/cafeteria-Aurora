@@ -1,0 +1,1699 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Fondo cafetería */
+  background: url("../img/video\ hero.mp4") no-repeat center center;
+  background-size: cover;
+}
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000; /* respaldo si el video no carga */
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-video {
+  pointer-events: none !important;
+}
+
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding-left: 50%; /* lo mueve más a la derecha */
+  max-width: 1800px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title {
+  font-size: 5.5rem; /* más grande y elegante */
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-title span {
+  color: #d4b07b; /* tono dorado cálido */
+}
+
+.hero-subtitle {
+  font-size: 3.1rem;
+  line-height: 1.6;
+  color: #eaeaea;
+  margin-bottom: 25px;
+}
+
+.hero-tag {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #8b5804;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background-color: #d4b07b;
+  color: #000;
+  border: none;
+  padding: 24px 40px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #b88a5a;
+  transform: scale(1.05);
+}
+
+
+/* ===================================
+   CONTENEDOR GENERAL DE TARJETAS (Fijo sobre la taza)
+=================================== */
+
+/* Aseguramos que la sección principal permita elementos absolutos */
+.hero {
+    position: relative !important;
+    overflow: hidden;
+}
+
+.menu-float-container {
+    position: absolute;
+    /* 🚀 ANCLAJE EXACTO: Fijamos la caja del arco sobre la mitad derecha 
+       de la pantalla para que calce justo encima de la taza de café */
+    top: 38%;
+    right: 16%;
+    transform: translateY(-50%);
+    
+    width: 700px;   /* Lienzo cuadrado local perfecto para las burbujas */
+    height: 700px;
+    z-index: 99;    /* Forzamos a que floten por encima de todo el fondo */
+    pointer-events: none; 
+    
+    /* 🚀 EFECTO INICIAL: Arrancan totalmente invisibles */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%); /* Arrancan un poquito más pequeñas */
+    transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 🚀 CUANDO EL JS DETECTA EL SPLASH: Se encienden y saltan al tamaño real */
+.menu-float-container.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    transform: translateY(-50%) scale(1); /* Expansión elástica tipo abanico */
+}
+    
+/* ===================================
+   TARJETAS CIRCULARES INTERACTIVAS (Gota Premium)
+=================================== */
+
+.menu-float {
+    position: absolute;
+    /* Bloqueamos el tamaño compacto de 100px para que no hereden gigantismo */
+    width: 330px !important;  
+    height: 330px !important;
+    max-width: 330px !important;
+    max-height: 330px !important;
+    
+    border-radius: 50% !important; /* Círculo perfecto obligado */
+    border: 3px solid rgba(212, 176, 123, 0.7); /* Borde dorado translúcido */
+    background: rgba(0, 0, 0, 0.5);            /* Efecto cristal esmerilado oscuro */
+    backdrop-filter: blur(8px);                 /* Filtro de desenfoque premium */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    pointer-events: auto; /* Activamos el mouse para los hovers */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); 
+    
+    /* Desactivamos temporalmente transformaciones externas rígidas */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Ajuste milimétrico de las imágenes jpegs adentro */
+.menu-float img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+
+/* Títulos del tipo de café */
+.menu-float h4 {
+    position: absolute;
+    bottom: 0;            /* Lo pegamos al puro fondo del círculo */
+    left: 0;
+    width: 100%;          /* Que ocupe todo el ancho para centrar el texto */
+    
+    /* 🚀 EL TRUCO DEL FONDO: Una pequeña franja oscura translúcida abajo 
+       que sirve de base protectora para que el fondo brillante de la foto no tape la letra */
+    background: rgba(0, 0, 0, 0.65); 
+    padding: 12px 0;      /* Espacio interno calientito para las letras */
+    
+    color: #eed0a4 !important; /* Tu dorado corporativo cálido */
+    font-size: 29px !important; /* Un tamaño equilibrado para que no se salga del círculo */
+    font-weight: 700 !important; 
+    text-transform: uppercase;
+    text-align: center;   /* Centrado milimétrico horizontal */
+    margin: 0;
+    pointer-events: none;
+    
+    /* 🚀 EL DELINEADO MAESTRO: Le dibuja un borde negro puro de 1.5 píxeles 
+       alrededor de cada letra individual. ¡No se vuelve a perder jamás! */
+    -webkit-text-stroke: 1.5px #000000;
+    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+
+/* ===================================
+   COORDENADAS LOCALES SEPARADAS EN ABANICO
+=================================== */
+
+/* Separamos las tarjetas estirando las esquinas en X para abrir el arco */
+
+.menu1 {
+    top: 260px;
+    left: -230px; /* Extremadamente abierta a la izquierda (Espresso) */
+}
+
+.menu2 {
+    /* 🚀 SUBIMOS HACIA ARRIBA: Pasamos de 10px a -40px para despejar el centro,
+       y la empujamos un poco más a la izquierda (left: 10px) para separarla */
+    top: -40px;
+    left: 10px;   
+}
+
+.menu3 {
+    /* 🚀 SUBIMOS HACIA ARRIBA: Pasamos de 10px a -40px en el eje vertical,
+       y la abrimos más a la derecha (right: 10px) para crear la separación central */
+    top: -40px;
+    right: 10px;  
+}
+
+.menu4 {
+    top: 260px;
+    right: -230px; /* Extremadamente abierta a la derecha (Latte) */
+}
+
+/* ===================================
+   ANIMACIÓN ORGÁNICA DE FLOTACIÓN
+=================================== */
+
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Acoplamos tu animación con tiempos desfasados para dar movimiento natural */
+.menu1 { animation: flotar 4s ease-in-out infinite; }
+.menu2 { animation: flotar 4.8s ease-in-out infinite; }
+.menu3 { animation: flotar 4.3s ease-in-out infinite; }
+.menu4 { animation: flotar 5.2s ease-in-out infinite; }
+
+/* Hover interactivo premium */
+.menu-float:hover {
+    transform: scale(1.1) !important;
+    border-color: rgba(212, 176, 123, 1);
+    box-shadow: 0 0 25px rgba(212, 176, 123, 0.8);
+}
+
+/* ===================================
+   CONFIGURACIÓN GLOBAL Y SCROLL SUAVE
+=================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0d0b0a;
+  color: #f4f1ea;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ===================================
+   SECCIÓN: SOBRE CAFÉ AURORA (#nosotros)
+=================================== */
+
+.about {
+  padding: 100px 8%;
+  background-color: #120f0d;
+  border-top: 1px solid rgba(212, 176, 123, 0.15);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text h2 {
+  font-size: 3rem;
+  color: #d4b07b;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.about-text p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #cfc8be;
+}
+
+.about-gallery {
+  flex: 1;
+  min-width: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.about-img {
+  height: 260px;
+  border-radius: 12px;
+  background-color: #241d18;
+  border: 1px solid rgba(212, 176, 123, 0.3);
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Respaldo visual con degradado cálido mientras cargas tus fotos */
+.about-img.img-1 {
+  background-image: linear-gradient(135deg, #2c1e16, #4a3222);
+  transform: translateY(-15px);
+}
+
+.about-img.img-2 {
+  background-image: linear-gradient(135deg, #3d281c, #6b4730);
+}
+
+.about-img.img-3 {
+  background-image: linear-gradient(135deg, #241811, #523624);
+  transform: translateY(15px);
+}
+
+.about-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(212, 176, 123, 0.25);
+}
+
+/* ===================================
+   SECCIÓN: SOBRE CAFÉ AURORA (#nosotros)
+=================================== */
+
+.about {
+  /* Aumentamos el relleno vertical y le damos altura mínima para que luzca imponente */
+  min-height: 85vh;
+  padding: 150px 8%;
+  display: flex;
+  align-items: center;
+  
+  /* Degradado suave entre negro profundo y un destello dorado/ámbar oscuro */
+  background: linear-gradient(135deg, #0a0807 0%, #24190e 50%, #0d0b0a 100%);
+  border-top: 1px solid rgba(212, 176, 123, 0.25);
+}
+
+.about-inner {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 320px;
+}
+
+.about-text h2 {
+  font-size: 3.5rem;
+  color: #d4b07b;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.about-text p {
+  font-size: 1.3rem;
+  line-height: 1.9;
+  color: #e0d8ce;
+}
+
+.about-gallery {
+  flex: 1.2;
+  min-width: 320px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.about-img {
+  /* Las hacemos más altas para que las fotos verticales resalten */
+  height: 360px;
+  border-radius: 16px;
+  background-color: #1f1712;
+  border: 2px solid rgba(212, 176, 123, 0.4);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* AQUÍ COLOCARÁS TUS IMÁGENES: Solo cambia el nombre de archivo en url(...) */
+.about-img.img-1 {
+  background-image: linear-gradient(135deg, #2c1e16, #4a3222);
+  /* Cuando tengas la foto lista, borra la línea de arriba y descomenta la de abajo: */
+  /* background-image: url("../img/tu-foto-1.jpg"); */
+  transform: translateY(-25px);
+}
+
+.about-img.img-2 {
+  background-image: linear-gradient(135deg, #3d281c, #6b4730);
+  /* background-image: url("../img/tu-foto-2.jpg"); */
+}
+
+.about-img.img-3 {
+  background-image: linear-gradient(135deg, #241811, #523624);
+  /* background-image: url("../img/tu-foto-3.jpg"); */
+  transform: translateY(25px);
+}
+
+.about-img:hover {
+  transform: scale(1.05);
+  border-color: #d4b07b;
+  box-shadow: 0 15px 35px rgba(212, 176, 123, 0.35);
+}
+/* ===================================
+   SECCIÓN: SOBRE CAFÉ AURORA (Completa y Grande)
+=================================== */
+
+.about {
+  min-height: 85vh;
+  padding: 140px 3%;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #0a0807 0%, #24190e 50%, #0d0b0a 100%);
+  border-top: 1px solid rgba(212, 176, 123, 0.25);
+}
+
+.about-inner {
+  width: 100%;
+  max-width: 96%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.about-text {
+  flex: 0.65;
+  min-width: 280px;
+}
+
+.about-text h2 {
+  font-size: 5.3rem;
+  color: #d4b07b;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.about-text p {
+  font-size: 2.25rem;
+  line-height: 1.8;
+  color: #e0d8ce;
+}
+
+.about-gallery {
+  flex: 2.3;
+  min-width: 400px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.about-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  border-radius: 16px;
+  background-color: #1f1712;
+  border: 2px solid rgba(212, 176, 123, 0.45);
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+/* Subimos la primera tarjeta 55px hacia arriba */
+.about-img.img-1 {
+  transform: translateY(-55px);
+}
+
+/* Mantenemos la del centro en su eje neutro */
+.about-img.img-2 {
+  transform: translateY(0px);
+}
+
+/* Bajamos la tercera tarjeta 55px hacia abajo */
+.about-img.img-3 {
+  transform: translateY(75px);
+}
+
+/* Al pasar el mouse, crece suavemente manteniendo su posición escalonada */
+.about-img.img-1:hover {
+  transform: translateY(-55px) scale(1.05);
+}
+
+.about-img.img-2:hover {
+  transform: translateY(0px) scale(1.05);
+}
+
+.about-img.img-3:hover {
+  transform: translateY(55px) scale(1.05);
+}
+.about-img:hover {
+  transform: scale(1.05);
+  border-color: #d4b07b;
+  box-shadow: 0 18px 40px rgba(212, 176, 123, 0.35);
+}
+
+
+/* ===================================
+   SECCIÓN: MENÚ DESTACADO (#menu) - VERSIÓN GRANDE
+=================================== */
+
+.menu {
+  min-height: 100vh;
+  padding: 140px 4%;
+  display: flex;
+  align-items: center;
+  background: radial-gradient(circle at center, #2e1d0f 0%, #0d0b0a 80%);
+  border-top: 1px solid rgba(212, 176, 123, 0.2);
+}
+
+.menu-inner {
+  width: 100%;
+  /* Ampliamos el ancho máximo al 94% de la pantalla para que respiren */
+  max-width: 94%; 
+  margin: 0 auto;
+}
+
+.menu-header {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 80px auto;
+}
+
+.menu-header h2 {
+  font-size: 6rem; /* Título más imponente */
+  color: #d4b07b;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.menu-header p {
+  font-size: 2.45rem;
+  color: #cfc8be;
+  line-height: 1.7;
+}
+
+.menu-grid {
+  display: grid;
+  /* Hacemos que las columnas sean mucho más anchas (mínimo 310px cada una) */
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 40px;
+}
+
+.menu-item {
+  background: rgba(18, 13, 10, 0.85);
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(212, 176, 123, 0.35);
+  border-radius: 26px;
+  /* Aumentamos el relleno interno para que la tarjeta crezca de alto y ancho */
+  padding: 55px 35px; 
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-15px);
+  border-color: #d4b07b;
+  box-shadow: 0 25px 50px rgba(212, 176, 123, 0.3);
+}
+
+.menu-img {
+  /* Agrandamos el espacio de la foto de 160px a 230px */
+  width: 330px; 
+  height: 330px;
+  margin: 0 auto 32px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle, #593a27, #261810);
+  border: 4px solid rgba(212, 176, 123, 0.7);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Si decides poner etiquetas <img> dentro de .menu-img, esto las ajusta solas */
+.menu-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.menu-item h3 {
+  font-size: 3.2rem; /* Nombre del café mucho más grande */
+  color: #fff;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.menu-item p {
+  font-size: 2.5rem; /* Descripción clara y legible */
+  color: #c2bab0;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.menu-price {
+  display: inline-block;
+  padding: 15px 35px;
+  background-color: rgba(212, 176, 123, 0.18);
+  color: #d4b07b;
+  font-weight: 700;
+  font-size: 2.8rem; /* Precio bien destacado */
+  border-radius: 30px;
+  border: 1.5px solid rgba(212, 176, 123, 0.6);
+}
+
+
+/* ===================================
+   FUSIÓN INVISIBLE SOBRE LA LÍNEA DIVISORIA
+=================================== */
+
+.hero {
+  position: relative;
+  /* Aseguramos que el puente difuminado pueda sobresalir hacia abajo */
+  overflow: visible !important; 
+}
+
+/* 1. Montamos una franja difuminada justo encima y debajo de la línea de corte */
+.hero::after {
+  content: "";
+  position: absolute;
+  /* Bajamos la franja 70px dentro de la siguiente sección para tapar la línea exacta */
+  bottom: -70px; 
+  left: 0;
+  width: 100%;
+  height: 240px; 
+  
+  /* Degradado de alta precisión con 5 paradas para que el ojo no note dónde empieza ni dónde acaba */
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 15, 8, 0) 0%,
+    rgba(26, 15, 8, 0.45) 35%,
+    #1a0f08 65%,
+    rgba(26, 15, 8, 0.85) 85%,
+    rgba(26, 15, 8, 0) 100%
+  );
+  
+  /* Desenfoca ligeramente los píxeles de los granos de café en el borde */
+  backdrop-filter: blur(4px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* 2. Sobre Nosotros arranca exactamente en ese mismo color café tostado */
+.about {
+  position: relative;
+  border-top: none !important;
+  margin-top: 0;
+  background: linear-gradient(
+    180deg,
+    #1a0f08 0%,
+    #2e1c0f 40%,
+    #3d2814 75%,
+    #120b07 100%
+  ) !important;
+}
+/* ===================================
+   SECCIÓN: EXPERIENCIA SENSORIAL (CASCADA + EFECTO LUZ)
+=================================== */
+
+.experience {
+  min-height: 95vh;
+  padding: 150px 4%;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, #0d0b0a 0%, #261a0e 50%, #0d0b0a 100%);
+  border-top: 1px solid rgba(212, 176, 123, 0.15);
+}
+
+.experience-inner {
+  width: 100%;
+  max-width: 92%;
+  margin: 0 auto;
+}
+
+.experience-header {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 100px auto;
+}
+
+.experience-header h2 {
+  font-size: 4rem;
+  color: #d4b07b;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.experience-header p {
+  font-size: 3.4rem;
+  color: #cfc8be;
+  line-height: 1.7;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 45px;
+  align-items: center;
+}
+
+/* Efecto de enfoque: atenúa suavemente las tarjetas que no tienen el cursor encima */
+.experience-grid:hover .experience-item:not(:hover) {
+  opacity: 0.65;
+  filter: blur(0.5px);
+}
+
+.experience-item {
+  position: relative;
+  background: linear-gradient(145deg, rgba(24, 17, 13, 0.9), rgba(12, 9, 7, 0.95));
+  backdrop-filter: blur(14px);
+  border: 2px solid rgba(212, 176, 123, 0.3);
+  border-radius: 28px;
+  min-height: 460px;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+  transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* HAZ DE LUZ DIAGONAL QUE CRUZA LA TARJETA */
+.experience-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 176, 123, 0.18),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.experience-item:hover::after {
+  left: 150%;
+}
+
+/* POSICIONES ESCALONADAS EN CASCADA DIAGONAL */
+.experience-item:nth-child(1) {
+  transform: translateY(-45px);
+}
+
+.experience-item:nth-child(2) {
+  transform: translateY(0px);
+}
+
+.experience-item:nth-child(3) {
+  transform: translateY(45px);
+}
+
+/* ELEVACIÓN Y RESPLANDOR AL PASAR EL MOUSE */
+.experience-item:nth-child(1):hover {
+  transform: translateY(-60px) scale(1.04);
+  border-color: #d4b07b;
+  box-shadow: 0 25px 55px rgba(212, 176, 123, 0.3), inset 0 0 25px rgba(212, 176, 123, 0.12);
+}
+
+.experience-item:nth-child(2):hover {
+  transform: translateY(-15px) scale(1.04);
+  border-color: #d4b07b;
+  box-shadow: 0 25px 55px rgba(212, 176, 123, 0.3), inset 0 0 25px rgba(212, 176, 123, 0.12);
+}
+
+.experience-item:nth-child(3):hover {
+  transform: translateY(30px) scale(1.04);
+  border-color: #d4b07b;
+  box-shadow: 0 25px 55px rgba(212, 176, 123, 0.3), inset 0 0 25px rgba(212, 176, 123, 0.12);
+}
+
+/* NÚMEROS EDITORIALES GIGANTES */
+.experience-item:nth-child(1)::before { content: "01"; }
+.experience-item:nth-child(2)::before { content: "02"; }
+.experience-item:nth-child(3)::before { content: "03"; }
+
+.experience-item::before {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 5rem;
+  font-weight: 800;
+  color: rgba(212, 176, 123, 0.08);
+  transition: color 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+.experience-item:hover::before {
+  color: rgba(212, 176, 123, 0.25);
+  transform: scale(1.1);
+}
+
+/* CÍRCULO CON FOTOGRAFÍA RECORTADA */
+.experience-icon {
+  width: 430px !important;
+  height: 430px !important;
+  min-width: 185px;
+  min-height: 185px;
+  margin: 0 auto 30px auto;
+  border-radius: 50% !important;
+  border: 4px solid #d4b07b;
+  overflow: hidden !important; /* Obliga a recortar las esquinas de la foto en círculo */
+  padding: 0 !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  transition: transform 0.5s ease, box-shadow 0.4s ease;
+}
+
+/* AJUSTE DE LA FOTOGRAFÍA DENTRO DEL CÍRCULO */
+.experience-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* Llena el círculo completo sin deformar la taza ni los granos */
+  border-radius: 50% !important;
+  display: block;
+}
+
+
+.experience-item:hover .experience-icon {
+  transform: rotate(12deg) scale(1.1);
+  box-shadow: 0 0 25px rgba(212, 176, 123, 0.5);
+}
+
+
+
+.experience-item h3 {
+  font-size: 4.2rem;
+  color: #fff;
+  margin-bottom: 18px;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.experience-item:hover h3 {
+  color: #d4b07b;
+}
+
+.experience-item p {
+  font-size: 2.25rem;
+  color: #c2bab0;
+  line-height: 1.7;
+}
+
+
+/* ===================================
+   SECCIÓN: UBICACIÓN Y HORARIOS (50/50 + DESTELLO)
+=================================== */
+
+.location {
+  min-height: 95vh;
+  padding: 150px 5%;
+  display: flex;
+  align-items: center;
+  background: radial-gradient(circle at right center, #261a0e 0%, #0d0b0a 75%);
+  border-top: 1px solid rgba(212, 176, 123, 0.2);
+}
+
+.location-inner {
+  width: 100%;
+  max-width: 92%;
+  margin: 0 auto;
+  /* Usamos Grid de 2 columnas exactas (50% y 50%) para dividir la pantalla a la mitad */
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  align-items: center;
+  gap: 60px;
+}
+
+/* --- COLUMNA IZQUIERDA: HORARIOS GRANDES (50%) --- */
+.location-info {
+  width: 100%;
+}
+
+.location-info h2 {
+  font-size: 4.7rem; /* Título bien grande y llamativo */
+  color: #d4b07b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.location-info p {
+  font-size: 2.65rem; /* Subtítulo mucho más claro y legible */
+  color: #e0d8ce;
+  margin-bottom: 45px;
+  line-height: 1.6;
+}
+
+.schedule {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.schedule li {
+  font-size: 2.55rem; /* Aumentamos bastante la letra de los horarios */
+  font-weight: 600;
+  color: #ffffff;
+  padding: 28px 35px; /* Tarjetas más altas y robustas */
+  margin-bottom: 22px;
+  background: rgba(18, 13, 10, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(212, 176, 123, 0.35);
+  border-left: 8px solid #d4b07b;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.schedule li:hover {
+  transform: translateX(14px);
+  border-color: #d4b07b;
+  box-shadow: 0 15px 35px rgba(212, 176, 123, 0.25);
+}
+
+/* --- COLUMNA DERECHA: CUADRO DEL MAPA (50% + DESTELLO) --- */
+.location-map {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.location-map a {
+  position: relative;
+  display: block;
+  width: 100%;
+  /* Mantiene una proporción cuadrada grande que ocupa toda su mitad */
+  aspect-ratio: 1 / 1; 
+  max-height: 580px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 3px solid #d4b07b;
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.75);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.location-map a:hover {
+  transform: scale(1.02);
+  box-shadow: 0 25px 60px rgba(212, 176, 123, 0.45);
+}
+
+.location-map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* DESTELLO DORADO ANIMADO QUE RECORRE TODO EL CUADRO */
+.location-map a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 45%,
+    rgba(212, 176, 123, 0.6) 50%,
+    rgba(255, 255, 255, 0.25) 55%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  /* Animación infinita que cruza el mapa cada 3.5 segundos */
+  animation: destelloMapa 3.5s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes destelloMapa {
+  0% {
+    left: -150%;
+  }
+  50%, 100% {
+    left: 160%;
+  }
+}
+
+/* Adaptación automática para celulares o pantallas pequeñas */
+@media (max-width: 950px) {
+  .location-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+/* ===================================
+   SECCIÓN: TESTIMONIOS A GRAN ESCALA Y ALTA LEGIBILIDAD
+=================================== */
+
+.testimonials {
+  min-height: 110vh;
+  padding: 120px 3%;
+  display: flex;
+  align-items: center;
+  background: radial-gradient(circle at center, #291c0f 0%, #0d0b0a 82%);
+  border-top: 1px solid rgba(212, 176, 123, 0.25);
+  overflow: hidden;
+}
+
+.testimonials-inner {
+  width: 100%;
+  /* Expandimos al 95% de tu monitor para aprovechar todo el espacio */
+  max-width: 95%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.testimonials-inner h2 {
+  font-size: 4.5rem !important;
+  color: #d4b07b;
+  margin-bottom: 65px;
+  font-weight: 700;
+}
+
+.testimonials-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 90px;
+  flex-wrap: wrap;
+}
+
+/* --- AVATAR GRANDE (MANTIENE SU ENCUADRE PERFECTO) --- */
+.testimonial-avatar {
+  /* Aumentamos el ancho a 420px y el alto a 680px manteniendo la misma proporción */
+  flex: 0 0 700px !important;
+  height: 950px !important;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 3px solid rgba(212, 176, 123, 0.55);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85);
+  background: linear-gradient(180deg, #1b120b 0%, #5c4328 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.avatar-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: scale(1.12);
+  display: block;
+}
+
+/* --- PILA DE TARJETAS GRANDES Y CON LETRA AMPLIA --- */
+.testimonials-stack {
+  /* Hacemos las tarjetas mucho más anchas y altas para que la letra respire */
+  flex: 0 0 640px !important;
+  max-width: 92%;
+  height: 660px !important;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonial-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(155deg, rgba(28, 20, 15, 0.97), rgba(14, 10, 8, 0.99));
+  border: 2.5px solid rgba(212, 176, 123, 0.5);
+  border-radius: 34px;
+  padding: 65px 60px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+
+.quote-icon {
+  font-size: 7.5rem !important;
+  line-height: 0.7;
+  color: rgba(212, 176, 123, 0.4);
+  font-family: Georgia, serif;
+}
+
+.testimonial-text {
+  /* Forzamos un tamaño de letra grande (2.4rem) y alto contraste para leer sin esfuerzo */
+  font-size: 2.4rem !important; 
+  font-style: italic;
+  color: #ffffff !important;
+  line-height: 1.55 !important;
+  margin: 25px 0;
+}
+
+.testimonial-author {
+  font-size: 1.85rem !important;
+  font-weight: 700;
+  color: #d4b07b !important;
+  padding-top: 25px;
+  border-top: 1.5px solid rgba(212, 176, 123, 0.25);
+}
+
+/* ESTADOS DE LA PILA GRANDE */
+.testimonial-card.active {
+  z-index: 3;
+  opacity: 1;
+  transform: translateX(0) translateY(0) scale(1);
+  border-color: #d4b07b;
+  box-shadow: 0 30px 70px rgba(212, 176, 123, 0.3);
+}
+
+.testimonial-card.next {
+  z-index: 2;
+  opacity: 0.65;
+  transform: translateX(48px) translateY(-25px) scale(0.94);
+  filter: blur(1px);
+}
+
+.testimonial-card.prev {
+  z-index: 1;
+  opacity: 0.35;
+  transform: translateX(96px) translateY(-50px) scale(0.88);
+  filter: blur(2px);
+}
+
+
+
+/* ===================================
+   PIE DE PÁGINA AL DOBLE DE TAMAÑO (PROTAGONISTA)
+=================================== */
+
+.footer {
+  background: linear-gradient(180deg, #0d0b0a 0%, #050403 100%) !important;
+  border-top: 3px solid rgba(212, 176, 123, 0.45) !important;
+  /* Duplicamos el relleno vertical para que ocupe una franja amplia y elegante */
+  padding: 140px 4% !important;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.footer-inner {
+  max-width: 95% !important;
+  width: 100%;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* --- BLOQUE MARCA + LOGO CIRCULAR DOBLE --- */
+.footer-brand {
+  display: flex !important;
+  align-items: center;
+  gap: 35px;
+}
+
+.footer-logo {
+  /* Duplicamos el círculo de 95px a 180px para que el diseño de Aurora resalte completo */
+  width: 250px !important;
+  height: 250px !important;
+  border-radius: 50% !important;
+  border: 4px solid #d4b07b !important;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(212, 176, 123, 0.35);
+  background-color: #e6dec8;
+  flex-shrink: 0;
+}
+
+.footer-logo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  /* Amplía ligeramente la imagen interna si tiene mucho borde vacío alrededor */
+  transform: scale(1.12);
+  display: block;
+}
+
+.footer-brand-text h3 {
+  /* Duplicamos el título de la marca */
+  font-size: 4.2rem !important;
+  color: #d4b07b !important;
+  margin-bottom: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.1;
+}
+
+.footer-brand-text p {
+  color: #e0d8ce !important;
+  font-size: 1.85rem !important;
+  margin: 0;
+}
+
+/* --- ENLACES DE NAVEGACIÓN GRANDES --- */
+.footer-links {
+  display: flex !important;
+  gap: 55px !important;
+}
+
+.footer-links a {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 2.1rem !important;
+  font-weight: 600 !important;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #d4b07b !important;
+  transform: translateY(-5px);
+}
+
+/* --- REDES SOCIALES AL DOBLE DE TAMAÑO --- */
+.footer-social {
+  display: flex !important;
+  gap: 32px !important;
+  flex-wrap: wrap;
+}
+
+.footer-social a {
+  display: flex !important;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 36px !important;
+  background: rgba(212, 176, 123, 0.12) !important;
+  border: 2px solid rgba(212, 176, 123, 0.5) !important;
+  border-radius: 60px !important;
+  color: #f4f1ea !important;
+  text-decoration: none !important;
+  font-size: 1.85rem !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease;
+}
+
+.footer-social a svg {
+  width: 38px !important;
+  height: 38px !important;
+  stroke: #d4b07b !important;
+  transition: stroke 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+  background: #d4b07b !important;
+  color: #0d0b0a !important;
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(212, 176, 123, 0.4);
+}
+
+.footer-social a:hover svg {
+  stroke: #0d0b0a !important;
+  transform: scale(1.12);
+}
+
+/* ===================================
+   DISEÑO RESPONSIVE (CELULARES Y TABLETS)
+=================================== */
+
+
+  @media screen and (max-width: 850px) {
+  /* --- 1. HERO Y TARJETAS FLOTANTES (CORREGIDO PARA MÓVIL) --- */
+  .hero {
+    min-height: auto !important;
+    height: auto !important;
+    padding: 60px 5% 40px 5% !important;
+    text-align: center !important;
+    overflow: hidden !important;
+  }
+
+  .hero-inner {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 30px !important;
+  }
+
+  .hero-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .hero-tag {
+    font-size: 0.75rem !important;
+    padding: 6px 14px !important;
+  }
+
+  .hero-title {
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+    margin: 15px 0 !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 25px !important;
+  }
+
+  /* Reducimos el tamaño del botón gigante "Ordenar ahora" para que quepa en pantalla */
+  .btn-primary {
+    font-size: 1.1rem !important;
+    padding: 14px 32px !important;
+    width: auto !important;
+    max-width: 90% !important;
+  }
+
+  /* Acomodamos la escena visual y las burbujas en fila ordenada debajo del botón */
+  .hero-visual,
+  .hero-stage,
+  .hero-cup {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+
+  .menu-float-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: row !important; /* Las pone una al lado de la otra en horizontal */
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 25px !important;
+  }
+
+
+  .menu-float {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    /* Reducimos el tamaño a 72px para que quepan las 4 juntas sin tapar la taza */
+    width: 72px !important;
+    height: 72px !important;
+    max-width: 72px !important;
+    max-height: 72px !important;
+    border-width: 2px !important;
+  }
+  .menu-float h4 {
+    font-size: 9px !important;
+    padding: 3px 0 !important;
+    -webkit-text-stroke: 0.5px #000000 !important;
+  }
+.hero-video {
+    /* Desplaza el enfoque del video hacia la derecha (75%) para que la taza salga completa */
+    object-position: 75% center !important;
+  }
+    /* --- OCULTAR EL DIFUMINADOR EN CELULAR PARA NO TAPAR LA TAZA --- */
+  .hero::after {
+    display: none !important;
+    content: none !important;
+    backdrop-filter: none !important;
+  }
+
+    /* --- 2. SOBRE CAFÉ AURORA (SIN DESBORDES) --- */
+  .about {
+    padding: 70px 5% !important;
+    min-height: auto !important;
+  }
+
+  .about-inner {
+    max-width: 100% !important;
+    gap: 30px !important;
+  }
+
+  .about-text {
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+    text-align: center;
+  }
+
+  .about-text h2 {
+    font-size: 2.2rem !important;
+  }
+
+  .about-text p {
+    font-size: 1.05rem !important;
+  }
+
+  .about-gallery {
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .about-img {
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  .about-img.img-1,
+  .about-img.img-2,
+  .about-img.img-3 {
+    transform: none !important;
+  }
+
+  /* --- 3. MENÚ DESTACADO (COMPACTO Y CENTRADO) --- */
+  .menu {
+    padding: 70px 5% !important;
+    min-height: auto !important;
+  }
+
+  .menu-inner {
+    max-width: 100% !important;
+  }
+
+  .menu-header h2 {
+    font-size: 2.2rem !important;
+  }
+
+  .menu-header p {
+    font-size: 1.05rem !important;
+  }
+
+  /* Forzamos 1 sola columna flexible (1fr) para que no se corte a la derecha */
+  .menu-grid {
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+  }
+
+  .menu-item {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: auto !important;
+    padding: 35px 20px !important;
+  }
+
+  .menu-img {
+    width: 170px !important;
+    height: 170px !important;
+  }
+
+  .menu-item h3 {
+    font-size: 1.5rem !important;
+  }
+
+  .menu-item p {
+    font-size: 1rem !important;
+  }
+
+  /* --- 4. EXPERIENCIA SENSORIAL (SOLUCIÓN AL CORTE LATERAL) --- */
+  .experience {
+    padding: 70px 5% !important;
+    min-height: auto !important;
+  }
+
+  .experience-inner {
+    max-width: 100% !important;
+  }
+
+  .experience-header {
+    margin-bottom: 45px !important;
+  }
+
+  .experience-header h2 {
+    font-size: 2.2rem !important;
+  }
+
+  .experience-header p {
+    font-size: 1.05rem !important;
+  }
+
+  /* Eliminamos el minmax(340px) que empujaba las tarjetas fuera del celular */
+  .experience-grid {
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+  }
+
+  .experience-item {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: auto !important;
+    padding: 40px 22px !important;
+  }
+
+  .experience-item:nth-child(1),
+  .experience-item:nth-child(2),
+  .experience-item:nth-child(3) {
+    transform: none !important;
+  }
+
+  .experience-icon {
+    width: 145px !important;
+    height: 145px !important;
+    min-width: 145px !important;
+    min-height: 145px !important;
+  }
+
+  .experience-item h3 {
+    font-size: 1.7rem !important;
+  }
+
+  .experience-item p {
+    font-size: 1.05rem !important;
+  }
+
+
+  /* --- 5. UBICACIÓN Y HORARIOS --- */
+  .location {
+    padding: 80px 5% !important;
+  }
+
+  .location-inner {
+    grid-template-columns: 1fr !important;
+    gap: 40px;
+  }
+
+  .location-info h2 {
+    font-size: 2.4rem !important;
+    text-align: center;
+  }
+
+  .location-info p {
+    font-size: 1.2rem !important;
+    text-align: center;
+  }
+
+  .schedule li {
+    font-size: 1.15rem !important;
+    padding: 18px 20px !important;
+  }
+
+  /* --- 6. TESTIMONIOS Y AVATAR --- */
+  .testimonials {
+    padding: 80px 5% !important;
+  }
+
+  .testimonials-inner h2 {
+    font-size: 2.4rem !important;
+    margin-bottom: 40px !important;
+  }
+
+  .testimonials-showcase {
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
+
+  .testimonial-avatar {
+    flex: none !important;
+    width: 280px !important;
+    height: 440px !important;
+  }
+
+  .testimonials-stack {
+    flex: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 420px !important;
+  }
+
+  .testimonial-card {
+    padding: 35px 28px !important;
+  }
+
+  .quote-icon {
+    font-size: 4rem !important;
+  }
+
+  .testimonial-text {
+    font-size: 1.35rem !important;
+  }
+
+  .testimonial-author {
+    font-size: 1.15rem !important;
+  }
+
+  /* Reducimos el desplazamiento de las tarjetas traseras para que no se salgan del borde */
+  .testimonial-card.next {
+    transform: translateX(12px) translateY(-12px) scale(0.95) !important;
+  }
+
+  .testimonial-card.prev {
+    transform: translateX(24px) translateY(-24px) scale(0.90) !important;
+  }
+
+  /* --- 7. FOOTER --- */
+  .footer {
+    padding: 70px 5% !important;
+    min-height: auto !important;
+  }
+
+  .footer-inner {
+    flex-direction: column !important;
+    text-align: center;
+    gap: 35px !important;
+  }
+
+  .footer-brand {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+
+  .footer-logo {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .footer-brand-text h3 {
+    font-size: 2.4rem !important;
+  }
+
+  .footer-brand-text p {
+    font-size: 1.15rem !important;
+  }
+
+  .footer-links {
+    flex-direction: column !important;
+    gap: 18px !important;
+  }
+
+  .footer-links a {
+    font-size: 1.3rem !important;
+  }
+
+  .footer-social {
+    justify-content: center !important;
+    gap: 15px !important;
+  }
+
+  .footer-social a {
+    padding: 14px 22px !important;
+    font-size: 1.2rem !important;
+  }
+
+  }
